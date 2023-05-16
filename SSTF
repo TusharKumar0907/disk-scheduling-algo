@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+
+  int n;
+  cin>>n;
+  int request[n+1];
+  for(int i=0 ; i<n ; i++){
+    cin>>request[i];
+  }
+
+  int head;
+  cin>>head;
+
+  int val = head;
+
+  int seekcount = 0;
+  vector<int>ans;
+  int visited[n+1] = {0};
+  
+  while(1){
+    
+    int nearest = INT_MAX;
+    int process = -1;
+
+    for(int i=0 ; i<n ; i++){
+        if(abs(head - request[i]) < nearest && visited[i]==0){
+            nearest = abs(head - request[i]);
+            process = i;
+        }
+    }
+
+    if(process==-1)break;
+
+    visited[process] = 1;
+    ans.push_back(request[process]);
+    head = request[process];
+
+  }
+
+  seekcount += abs(val - ans[0]);
+
+  for(int i=0 ; i<n-1 ; i++){
+    seekcount += abs(ans[i] - ans[i+1]);
+  }
+
+    
+  cout<<"Seek sequence is"<<endl;
+
+  for(int i=0 ; i<n ; i++){
+    cout<<ans[i]<<" ";
+  }
+
+  cout<<endl;
+  
+  cout<<"seekcount"<<endl;
+  cout<<seekcount<<endl;
+
+  
+}
